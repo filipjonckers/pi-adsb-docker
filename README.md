@@ -184,15 +184,73 @@ Connect again to your Raspberry Pi using SSH:
 
 ## Configure dump1090
 
+Create a copy of the example file and set your latitude and longitude in `dump1090fa.conf`:
+
+```
+$ cp dump1090fa/dump1090fa.conf.example dump1090fa/dump1090fa.conf
+$ vi dump1090fa/dump1090fa.conf
+```
+
+Example `dump1090fa.conf`:
+
+```
+DUMP_LAT=51.0
+DUMP_LON=4.0
+```
+
 
 ## Configure Flightradar24 feeder
+
+Create a copy of the example file and set your FR24 key in `fr24feed.ini`:
+
+```
+$ cp fr24/fr24feed.ini.example fr24/fr24feed.ini
+$ vi fr24/fr24feed.ini
+```
+
+Example `fr24feed.ini`:
+
+```
+receiver="avr-tcp"
+host="dump1090fa:30002"
+fr24key="XXXXXXXXXXXXXXXXX"
+bs="no"
+raw="no"
+logmode="2"
+windowmode="0"
+logpath="/var/log"
+mlat="yes"
+mlat-without-gps="yes"
+gt="60"
+```
 
 
 ## Configure Flightaware feeder
 
+Create a copy of the example file and set your FlightAware key in `piaware.conf`:
+
+```
+$ cp flightaware/piaware.conf.example flightaware/piaware.conf
+$ vi flightaware/piaware.conf
+```
+
+Example `piaware.conf`:
+
+```
+receiver-type other
+receiver-host dump1090fa
+receiver-port 30005
+feeder-id XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+mlat-results yes
+mlat-results-anon yes
+allow-modeac yes
+mlat-results-format beast,connect,dump1090fa:30104
+```
+
 
 ## Configure Adsbexchange feeder
 
+Nothing to be done.
 
 
 # Start the docker containers

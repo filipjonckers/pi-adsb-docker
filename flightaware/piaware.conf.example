@@ -1,0 +1,9 @@
+receiver-type other
+receiver-host dump1090fa
+receiver-port 30005
+feeder-id XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+mlat-results yes
+mlat-results-anon yes
+allow-modeac yes
+mlat-results-format beast,connect,dump1090fa:30104
+
