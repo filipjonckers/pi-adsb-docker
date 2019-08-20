@@ -1,2 +1,5 @@
 dump1090fa/data/
+dump1090fa/dump1090fa.conf
+flightaware/piaware.conf
+fr24/fr24feed.ini
 .DS_Store
