@@ -57,3 +57,10 @@ services:
       -  dump1090fa
     environment:
       - CUSTOM_PORT=51051
+  adsbhub:
+    image: "filipjonckers/raspbian-adsbhub"
+    build: ./adsbhub
+    container_name: adsbhub
+    restart: always
+    depends_on:
+      -  dump1090fa

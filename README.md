@@ -296,30 +296,25 @@ If you dont want to feed FlightRadar24.com comment out the flightradar service i
 
 You should be given a key that you can copy and enter into `fr24feed.ini` file.
 
+## ADS-B Hub
+
+Make sure that your external IP address is used as an ADS-B station in your profile.  Use the statistics page to monitor the performance of your feed.
+
+## ADS-B Exchange
+
+Use the feeder status check page to monitor the link status of your feed.
+
 
 
 # Troubleshooting
 
-- Check the logs for the FlightRadar24 container
+Use the docker container name to show the logs for each feeder:
+
 
     ```
     $ docker logs fr24
-    ```
-
-- Check the logs for the ADS-B Exchange container
-
-    ```
     $ docker logs adsbexchange
-    ```
-    
-- Check the logs for the piaware container
-
-    ```
     $ docker logs piaware
-    ```
-    
-- Check the logs for the dump1090 container
-
-    ```
+    $ docker logs adsbhub
     $ docker logs dump1090fa
     ```
