@@ -300,6 +300,18 @@ You should be given a key that you can copy and enter into `fr24feed.ini` file.
 
 # Troubleshooting
 
+- Check the logs for the FlightRadar24 container
+
+    ```
+    $ docker logs fr24
+    ```
+
+- Check the logs for the ADS-B Exchange container
+
+    ```
+    $ docker logs adsbexchange
+    ```
+    
 - Check the logs for the piaware container
 
     ```
@@ -309,5 +321,5 @@ You should be given a key that you can copy and enter into `fr24feed.ini` file.
 - Check the logs for the dump1090 container
 
     ```
-    $ docker logs dump1090
+    $ docker logs dump1090fa
     ```
