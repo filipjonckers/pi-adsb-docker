@@ -1,0 +1,18 @@
+[GPS]
+Latitude=51.0
+Longitude=4.0
+Altitude=12
+
+[DEVICE]
+Type=default
+# replace serial with your own or remove to generate a new serial number
+# see docker logfile to find your auto generated feeder serial number
+serial=XXXXXXXX
+
+[IDENT]
+Username=XXXXXXXXX
+
+[INPUT]
+Host=dump1090fa
+Port=30005
+

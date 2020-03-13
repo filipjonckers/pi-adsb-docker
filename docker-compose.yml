@@ -64,3 +64,15 @@ services:
     restart: always
     depends_on:
       -  dump1090fa
+
+  opensky:
+    image: "filipjonckers/raspbian-opensky"
+    build: ./opensky
+    container_name: opensky
+    restart: "no"
+    depends_on:
+      - dump1090fa
+    volumes:
+      - ./opensky/10-debconf.conf:/var/lib/openskyd/conf.d/10-debconf.conf
+ 
+ 
