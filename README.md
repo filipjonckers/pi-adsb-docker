@@ -1,3 +1,10 @@
+[![GitHub license](https://img.shields.io/github/license/filipjonckers/asterix4py)](https://github.com/filipjonckers/asterix4py/blob/master/LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![GitHub contributors](https://img.shields.io/github/contributors/filipjonckers/asterix4py)](https://github.com/filipjonckers/asterix4py/graphs/contributors)
+[![GitHub issues](https://img.shields.io/github/issues/filipjonckers/asterix4py)](https://github.com/filipjonckers/asterix4py/issues)
+
+
+
 # Introduction
 
 A different approach to tracking aircraft using Docker with your Raspberry Pi and a USB TV stick.  Instead of installing everything by hand in a single environment we will be using separate docker containers for each feeder instance.
