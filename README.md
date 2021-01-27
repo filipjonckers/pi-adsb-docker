@@ -170,8 +170,8 @@ Connect again to your Raspberry Pi using SSH:
 1. Clone this GIT repository on your raspberry pi:
 
     ```
-    $ git clone https://github.com/filipjonckers/eyes-in-the-sky
-    $ cd eyes-in-the-sky
+    $ git clone https://github.com/filipjonckers/pi-adsb-docker
+    $ cd pi-adsb-docker
     ```
 
 2. Edit docker-compose.yml if required (Optional)
