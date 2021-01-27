@@ -1,7 +1,7 @@
-[![GitHub license](https://img.shields.io/github/license/filipjonckers/asterix4py)](https://github.com/filipjonckers/asterix4py/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/filipjonckers/asterix4py)](https://github.com/filipjonckers/pi-adsb-docker/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
-[![GitHub contributors](https://img.shields.io/github/contributors/filipjonckers/asterix4py)](https://github.com/filipjonckers/asterix4py/graphs/contributors)
-[![GitHub issues](https://img.shields.io/github/issues/filipjonckers/asterix4py)](https://github.com/filipjonckers/asterix4py/issues)
+[![GitHub contributors](https://img.shields.io/github/contributors/filipjonckers/pi-adsb-docker)](https://github.com/filipjonckers/pi-adsb-docker/graphs/contributors)
+[![GitHub issues](https://img.shields.io/github/issues/filipjonckers/pi-adsb-docker)](https://github.com/filipjonckers/pi-adsb-docker/issues)
 
 
 
