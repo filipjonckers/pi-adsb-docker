@@ -15,7 +15,7 @@ socat -d -d -u "TCP:${DUMP1090_HOST}:${DUMP1090_PORT}" TCP:data.adsbhub.org:5001
 STATUS=${?}
 set -o errexit
 
-echo "Frowarding of dump1090 data ended"
+echo "Forwarding of dump1090 data ended"
 
 if [ "${SOCAT_STATUS}" -eq 0 ]; then
 	echo "Forwarding of dump1090 data stopped"
