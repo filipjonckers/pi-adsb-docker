@@ -10,11 +10,6 @@ ADD https://opensky-network.org/files/firmware/opensky-feeder_latest_armhf.deb o
 
 RUN dpkg -x opensky-feeder.deb /
 
-
-#RUN dpkg -x opensky-feeder.deb / && \
-#    rm opensky-feeder.deb && \
-#    rm /usr/bin/qemu-arm-static
-
 COPY start.sh start.sh
 RUN chmod +x start.sh
 
