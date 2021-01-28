@@ -70,7 +70,7 @@ services:
     image: "filipjonckers/raspbian-opensky"
     build: ./opensky
     container_name: opensky
-    restart: "no"
+    restart: "always"
     depends_on:
       - dump1090fa
     volumes:
