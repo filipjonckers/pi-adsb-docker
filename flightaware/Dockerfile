@@ -1,12 +1,14 @@
-FROM balenalib/rpi-raspbian:stretch
+FROM balenalib/rpi-raspbian:buster
 
 ENTRYPOINT []
 
 RUN apt-get update && apt-get install -qy apt-utils wget
-RUN wget http://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_3.6.3_all.deb \
-  && dpkg -i piaware-repository_3.6.3_all.deb \
+RUN wget https://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_4.0_all.deb \
+  && sudo dpkg -i piaware-repository_4.0_all.deb \
   && apt-get update \
-  && apt-get install -qy piaware
+  && apt-get install -qy piaware \
+  && sudo piaware-config allow-auto-updates yes \
+  && sudo piaware-config allow-manual-updates yes
 
 COPY ./piaware.conf /etc/piaware.conf
 COPY ./start.sh start.sh
