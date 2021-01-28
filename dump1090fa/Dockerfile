@@ -1,4 +1,4 @@
-FROM balenalib/rpi-raspbian:stretch
+FROM balenalib/rpi-raspbian:buster
 ENTRYPOINT []
 
 WORKDIR /root
@@ -25,8 +25,8 @@ RUN git clone git://git.osmocom.org/rtl-sdr.git \
     && ldconfig \
     && cp /root/rtl-sdr/rtl-sdr.rules /etc/udev/rules.d/
     
-RUN wget http://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_3.6.3_all.deb \
-    && sudo dpkg -i piaware-repository_3.6.3_all.deb
+RUN wget https://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_4.0_all.deb \
+    && sudo dpkg -i piaware-repository_4.0_all.deb
 
 RUN sudo apt-get update
 RUN sudo apt-get install dump1090-fa
@@ -49,4 +49,3 @@ RUN chmod +x start.sh
 ENV DUMP_LAT="" DUMP_LON="" 
 
 CMD ["/root/dump1090/start.sh"]
-
