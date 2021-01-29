@@ -206,6 +206,23 @@ DUMP_LON=4.0
 ```
 
 
+## Configure tar1090
+
+Create a copy of the example file and set your latitude and longitude in `tar1090.conf`:
+
+```
+$ cp tar1090/tar1090.conf.example tar1090/tar1090.conf
+$ vi tar1090/tar1090.conf
+```
+
+Example `tar1090.conf`:
+
+```
+DUMP_LAT=51.0
+DUMP_LON=4.0
+```
+
+
 ## Configure Flightradar24 feeder
 
 Create a copy of the example file and set your FR24 key in `fr24feed.ini`:

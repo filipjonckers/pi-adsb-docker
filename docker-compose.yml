@@ -28,6 +28,17 @@ services:
      - "30104:30104"
     env_file:
       - ./dump1090fa/dump1090fa.conf
+  tar1090:
+    image: "mikenye/tar1090:latest"
+    container_name: tar1090
+    tty: true
+    restart: always
+    depends_on:
+      - dump1090fa
+    ports:
+      - "8888:80"
+    env_file:
+      - ./tar1090/tar1090.conf
   piaware:
     image: "filipjonckers/raspbian-flightaware"
     build: ./flightaware
@@ -65,7 +76,6 @@ services:
     restart: always
     depends_on:
       -  dump1090fa
-
   opensky:
     image: "filipjonckers/raspbian-opensky"
     build: ./opensky
