@@ -18,7 +18,6 @@ services:
      - ./dump1090fa/data:/var/run/dump1090-fa
      - ./dump1090fa/start.sh:/root/dump1090/start.sh 
     ports:
-     - "80:8080"
      - "8080:8080"
      - "30001:30001"
      - "30002:30002"
@@ -36,7 +35,7 @@ services:
     depends_on:
       - dump1090fa
     ports:
-      - "8888:80"
+      - "80:80"
     env_file:
       - ./tar1090/tar1090.conf
   piaware:
