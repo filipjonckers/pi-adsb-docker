@@ -218,9 +218,15 @@ $ vi tar1090/tar1090.conf
 Example `tar1090.conf`:
 
 ```
-DUMP_LAT=51.0
-DUMP_LON=4.0
+LAT=51.0
+LONG=4.0
+TZ=UTC
+BEASTHOST=dump1090fa
+# MLATHOST=dump1090fa
 ```
+
+Note: MLAT currently not active in dump1090fa.
+
 
 
 ## Configure Flightradar24 feeder
