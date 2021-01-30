@@ -13,6 +13,8 @@ Inspired by great work from the following people:
 * Alex Ellis' blog post: [Get eyes in the sky with your Raspberry Pi](https://blog.alexellis.io/track-flights-with-rpi/)
 * [Alex Ellis' original github project](https://github.com/alexellis/eyes-in-the-sky)
 * [LoungeFlyZ enhanced github project which added the FlightRadar24 feed](https://github.com/LoungeFlyZ/eyes-in-the-sky)
+* [Mike, mikenye - Docker images for readsb, tar1090](https://github.com/mikenye)
+* [wiedehopf's tar1090](https://github.com/wiedehopf/tar1090)
 
 
 We will start from a bare-bone Raspberry Pi installation but you can skip the initial parts if you already have an existing setup that you want to adapt.
