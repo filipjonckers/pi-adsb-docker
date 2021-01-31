@@ -125,39 +125,39 @@ This configuration is optional unless you want to easily connect to your Raspber
 
 Raspbian can be time sync'ed automatically (In this example we will use UTC time as this is the international aeronautical standard).
 
-    ```
-    $ sudo timedatectl set-timezone UTC
-    $ sudo timedatectl set-ntp true
-    ```
+```bash
+$ sudo timedatectl set-timezone UTC
+$ sudo timedatectl set-ntp true
+```
 
 Check the status of the time sync:
 
-    ```bash
-    $ timedatectl status
-                   Local time: Sun 2021-01-31 21:30:17 UTC
-               Universal time: Sun 2021-01-31 21:30:17 UTC
-                     RTC time: n/a
-                    Time zone: UTC (UTC, +0000)
-    System clock synchronized: yes
-                  NTP service: active
-              RTC in local TZ: no
-    
-    $ $ timedatectl show
-    Timezone=UTC
-    LocalRTC=no
-    CanNTP=yes
-    NTP=yes
-    NTPSynchronized=yes
-    TimeUSec=Sun 2021-01-31 21:34:08 UTC
-    ```
+```bash
+$ timedatectl status
+               Local time: Sun 2021-01-31 21:30:17 UTC
+           Universal time: Sun 2021-01-31 21:30:17 UTC
+                 RTC time: n/a
+                Time zone: UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+
+$ $ timedatectl show
+Timezone=UTC
+LocalRTC=no
+CanNTP=yes
+NTP=yes
+NTPSynchronized=yes
+TimeUSec=Sun 2021-01-31 21:34:08 UTC
+```
 
 The time server used can optionally be adjusted:
 
-    ```bash
-    $ sudo vim /etc/systemd/timesyncd.conf
-    [Time]
-    NTP=<custom ntp server address>
-    ```
+```bash
+$ sudo vim /etc/systemd/timesyncd.conf
+[Time]
+NTP=<custom ntp server address>
+```
 
 
 # Prepare Raspberry Pi for a DVB-T receiver
