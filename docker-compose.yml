@@ -15,7 +15,7 @@ services:
     restart: always
     privileged: true
     volumes:
-     - ./dump1090fa/data:/var/run/dump1090-fa
+     - /var/run/dump1090fa:/var/run/dump1090-fa
      - ./dump1090fa/start.sh:/root/dump1090/start.sh 
     ports:
      - "8080:8080"
