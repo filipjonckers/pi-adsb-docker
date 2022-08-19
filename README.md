@@ -56,7 +56,7 @@ The following steps are performed on a MacBook - the steps might be slightly dif
     ```
     country=be
     update_config=1
-    ctrl_interface=/var/run/wpa_supplicant GROUP=netdev
+    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 
     network={
         ssid="your SSID"
