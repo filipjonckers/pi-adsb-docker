@@ -3,8 +3,6 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/filipjonckers/pi-adsb-docker)](https://github.com/filipjonckers/pi-adsb-docker/graphs/contributors)
 [![GitHub issues](https://img.shields.io/github/issues/filipjonckers/pi-adsb-docker)](https://github.com/filipjonckers/pi-adsb-docker/issues)
 
-
-
 # Introduction
 
 A different approach to tracking aircraft using Docker with your Raspberry Pi and a USB TV stick.  Instead of installing everything by hand in a single environment we will be using separate docker containers for each feeder instance.
@@ -16,15 +14,11 @@ Inspired by great work from the following people:
 * [Mike, mikenye - Docker images for readsb, tar1090](https://github.com/mikenye)
 * [wiedehopf's tar1090](https://github.com/wiedehopf/tar1090)
 
-
 We will start from a bare-bone Raspberry Pi installation but you can skip the initial parts if you already have an existing setup that you want to adapt.
-
-
 
 # Initial Raspberry Pi setup
 
 The following steps are performed on a MacBook - the steps might be slightly difference if you use a PC (Windows or Linux). I assume you are able to translate this accordingly.
-
 
 1. Download the latest Raspbian Lite image  [https://www.raspberrypi.org/downloads/raspbian](https://www.raspberrypi.org/downloads/raspbian)
 
@@ -38,7 +32,7 @@ The following steps are performed on a MacBook - the steps might be slightly dif
 
     Add an empty `ssh` file on the boot partition to enable SSH:
 
-    ```
+    ```bash
     $ touch /Volumes/boot/ssh
     ```
 
@@ -46,14 +40,14 @@ The following steps are performed on a MacBook - the steps might be slightly dif
 
     I prefer to use the Ethernet connection but if you would like to use WiFi to connect your Raspberry Pi to your local network then you need to add a new file `wpa_supplicant.conf` on the boot partition (I use vim in the example below, you can use your favourite text editor):
 
-    ```
+    ```bash
     $ touch /Volumes/boot/wpa_supplicant.conf
     $ vim /Volumes/boot/wpa_supplicant.conf
     ```
 
     Add the following content to the `wpa_supplicant.conf` file:
 
-    ```
+    ```ini
     country=be
     update_config=1
     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -72,7 +66,7 @@ The following steps are performed on a MacBook - the steps might be slightly dif
 
 7. connect to the raspberry Pi using SSH:
 
-    ```
+    ```bash
     $ ssh pi@raspberrypi.local
     ```
 
@@ -80,13 +74,13 @@ The following steps are performed on a MacBook - the steps might be slightly dif
 
 8. Change default password
 
-    ```
+    ```bash
     $ passwd
     ```
 
 9. Update Raspbian
 
-    ```
+    ```bash
     $ sudo apt-get update -y
     $ sudo apt-get upgrade -y
     ```
@@ -96,30 +90,27 @@ The following steps are performed on a MacBook - the steps might be slightly dif
 
 This configuration is optional unless you want to easily connect to your Raspberry Pi by always using the same IP address.  Depending on your local setup - add the confguration part from the Ethernet or the WiFi setup below to the file `/etc/dhcpcd.conf`.
 
-    ```
-    $ vi /etc/dhcpcd.conf
-    ```
-
+```bash
+$ vi /etc/dhcpcd.conf
+```
 
 ## Ethernet cable connection (preferred)
 
-    ```
-    interface eth0 
-    static ip_address=192.168.0.212/24
-    static routers=192.168.0.1
-    static domain_name_servers=8.8.8.8
-    ```
-
+```ini
+interface eth0 
+static ip_address=192.168.0.212/24
+static routers=192.168.0.1
+static domain_name_servers=8.8.8.8
+```
 
 ## WiFi connection
 
-    ```
-    interface wlan0 
-    static ip_address=192.168.0.212/24
-    static routers=192.168.0.1
-    static domain_name_servers=8.8.8.8
-    ```
-
+```ini
+interface wlan0 
+static ip_address=192.168.0.212/24
+static routers=192.168.0.1
+static domain_name_servers=8.8.8.8
+```
 
 # Time synchronisation
 
@@ -142,7 +133,10 @@ System clock synchronized: yes
               NTP service: active
           RTC in local TZ: no
 
-$ $ timedatectl show
+$ timedatectl show
+```
+
+```ini
 Timezone=UTC
 LocalRTC=no
 CanNTP=yes
@@ -155,16 +149,18 @@ The time server used can optionally be adjusted:
 
 ```bash
 $ sudo vim /etc/systemd/timesyncd.conf
+```
+
+```ini
 [Time]
 NTP=<custom ntp server address>
 ```
-
 
 # Prepare Raspberry Pi for a DVB-T receiver
 
 blacklist your DVB-T receiver to avoid the loading of the default driver:
 
-```
+```bash
 $ sudo sh -c "echo 'blacklist dvb_usb_rtl28xxu' > /etc/modprobe.d/blacklist-dvbt.conf"
 ```
 
@@ -172,34 +168,33 @@ If this is not done correctly, DUMP1090 will give the following error when start
 
 At this point reboot your Raspberry Pi (disconnect the power and connect again) and connect your DVB-T receiver.
 
-    ```
-    $ sudo reboot
-    ```
+```bash
+$ sudo reboot
+```
 
 Connect again to your Raspberry Pi using SSH:
 
-    ```
-    $ ssh pi@raspberrypi.local
-    ```
-
+```bash
+$ ssh pi@raspberrypi.local
+```
 
 # Install Docker
 
 1. install Docker on your raspberry pi:
 
-    ```
+    ```bash
     $ curl -sSL https://get.docker.com | sh
     ```
 
 2. Optionally (security risk!) if you would like to run docker commands without using sudo:
 
-    ```
+    ```bash
     $ sudo usermod -a -G docker pi
     ```
 
 3. Install docker-compose and git:
 
-    ```
+    ```bash
     $ sudo apt-get -y install git python python-pip libffi-dev python-backports.ssl-match-hostname
     $ sudo pip install docker-compose
     ```
@@ -208,57 +203,54 @@ Connect again to your Raspberry Pi using SSH:
 
     To finalize reboot your Raspberry Pi and connect again using SSH
 
-    ```
+    ```bash
     $ sudo reboot
     ```
-
 
 # Setup Docker ADS-B environment
 
 1. Clone this GIT repository on your raspberry pi:
 
-    ```
+    ```bash
     $ git clone https://github.com/filipjonckers/pi-adsb-docker
     $ cd pi-adsb-docker
     ```
 
 2. Edit docker-compose.yml if required (Optional)
 
-    ```
+    ```bash
     $ cp docker-compose.yml.template docker-compose.yml
     $ nano docker-compose.yml
     ```
-
 
 ## Configure dump1090
 
 Create a copy of the example file and set your latitude and longitude in `dump1090fa.conf`:
 
-```
+```bash
 $ cp dump1090fa/dump1090fa.conf.example dump1090fa/dump1090fa.conf
 $ vi dump1090fa/dump1090fa.conf
 ```
 
 Example `dump1090fa.conf`:
 
-```
+```ini
 DUMP_LAT=51.0
 DUMP_LON=4.0
 ```
-
 
 ## Configure tar1090
 
 Create a copy of the example file and set your latitude and longitude in `tar1090.conf`:
 
-```
+```bash
 $ cp tar1090/tar1090.conf.example tar1090/tar1090.conf
 $ vi tar1090/tar1090.conf
 ```
 
 Example `tar1090.conf`:
 
-```
+```ini
 LAT=51.0
 LONG=4.0
 TZ=UTC
@@ -268,20 +260,18 @@ BEASTHOST=dump1090fa
 
 Note: MLAT currently not active in dump1090fa.
 
-
-
 ## Configure Flightradar24 feeder
 
 Create a copy of the example file and set your FR24 key in `fr24feed.ini`:
 
-```
+```bash
 $ cp fr24/fr24feed.ini.example fr24/fr24feed.ini
 $ vi fr24/fr24feed.ini
 ```
 
 Example `fr24feed.ini`:
 
-```
+```ini
 receiver="avr-tcp"
 host="dump1090fa:30002"
 fr24key="XXXXXXXXXXXXXXXXX"
@@ -295,19 +285,18 @@ mlat-without-gps="yes"
 gt="60"
 ```
 
-
 ## Configure Flightaware feeder
 
 Create a copy of the example file and set your FlightAware key in `piaware.conf`:
 
-```
+```bash
 $ cp flightaware/piaware.conf.example flightaware/piaware.conf
 $ vi flightaware/piaware.conf
 ```
 
 Example `piaware.conf`:
 
-```
+```ini
 receiver-type other
 receiver-host dump1090fa
 receiver-port 30005
@@ -318,26 +307,23 @@ allow-modeac yes
 mlat-results-format beast,connect,dump1090fa:30104
 ```
 
-
 ## Configure Adsbexchange feeder
 
 Nothing to be done.
-
 
 # Start the docker containers
 
 1. docker-compose up
 
-    ```
+    ```bash
     $ docker-compose up -d
     ```
-    
-2. browse to your raspberry pi's ip address on port 8080
- 
-    [http://raspberrypi.local:8080](http:///raspberrypi.local:8080) _(replace with your ip address)_
-    
-    You should now see dump1090's web interface.
 
+2. browse to your raspberry pi's ip address on port 8080
+
+    [http://raspberrypi.local:8080](http:///raspberrypi.local:8080) _(replace with your ip address)_
+
+    You should now see dump1090's web interface.
 
 # Getting your feeder id
 
@@ -352,10 +338,9 @@ Before you can feed FlightRadar24.com you need to create an account on their web
 
 If you dont want to feed FlightRadar24.com comment out the flightradar service in the docker-compose.yml
 
-
-    ```
-    $ docker run --rm -it loungefly/raspbian-flightradar24 /usr/bin/fr24feed --signup
-    ```
+```bash
+$ docker run --rm -it loungefly/raspbian-flightradar24 /usr/bin/fr24feed --signup
+```
 
 1. Enter your accounts email address
 2. Leave blank
@@ -375,17 +360,14 @@ Make sure that your external IP address is used as an ADS-B station in your prof
 
 Use the feeder status check page to monitor the link status of your feed.
 
-
-
 # Troubleshooting
 
 Use the docker container name to show the logs for each feeder:
 
-
-    ```
-    $ docker logs fr24
-    $ docker logs adsbexchange
-    $ docker logs piaware
-    $ docker logs adsbhub
-    $ docker logs dump1090fa
-    ```
+```bash
+$ docker logs fr24
+$ docker logs adsbexchange
+$ docker logs piaware
+$ docker logs adsbhub
+$ docker logs dump1090fa
+```
