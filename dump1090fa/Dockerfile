@@ -16,7 +16,7 @@ RUN apt-get update -qy \
     libterm-readline-perl-perl
 
 # not needed to run dump1090-fa but could be useful for debugging issues
-RUN git clone git://git.osmocom.org/rtl-sdr.git \
+RUN git clone https://git.osmocom.org/rtl-sdr.git \
     && mkdir -p ./rtl-sdr/build \
     && cd /root/rtl-sdr/build \
     && cmake ../ -DINSTALL_UDEV_RULES=ON \
